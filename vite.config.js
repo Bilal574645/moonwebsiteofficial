@@ -4,7 +4,7 @@ import jsconfigPaths from "vite-jsconfig-paths"
 import license from "rollup-plugin-license"
 
 export default defineConfig({
-  base: process.env.NODE_ENV === "production" ? "/next-college-website/" : "/",
+  base: "/",
   plugins: [
     jsconfigPaths(),
     license({
@@ -26,7 +26,8 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         courses: resolve(__dirname, "src/pages/courses.html"),
         "contact-us": resolve(__dirname, "src/pages/contact-us.html"),
-        "art-course": resolve(__dirname, "src/pages/art-course.html")
+        "art-course": resolve(__dirname, "src/pages/art-course.html"),
+        about: resolve(__dirname, "src/pages/about.html")
       },
       output: {
         assetFileNames: ({ name, type, source }) => {
