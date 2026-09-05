@@ -1,0 +1,242 @@
+// ADD THIS LINE to main.scss, right after "@import "./parallax";":
+//   @import "./about";
+//
+// ============================================================
+// About page — visual identity
+// Palette grounded in the subject: warm gold ($primary, already
+// in use) paired with a deep mosque-tile green, on a soft paper
+// background instead of pure white. One bold moment (the arch
+// in the hero) — everything else stays quiet.
+// ============================================================
+
+$about-ink: #16261f; // near-black with a green cast, used instead of flat #000
+$about-forest: #0b3d2e; // deep tile green, the site's second brand color
+$about-paper: #faf6ec; // warm paper background
+$about-line: rgba($about-forest, 0.15);
+
+.about-hero,
+.about-cta {
+    font-family: "Amiri", $font-family-sans-serif;
+}
+
+// ---------- Hero ----------
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    background-color: $about-forest;
+    color: #fff;
+    padding-top: 9rem;
+    padding-bottom: 5rem;
+
+    .about-hero-kicker {
+        display: inline-block;
+        color: $primary;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .about-hero-title {
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.15;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        max-width: 20ch;
+    }
+
+    .about-hero-lede {
+        font-family: $font-family-sans-serif;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 55ch;
+        margin-bottom: 2rem;
+    }
+
+    .btn-outline-light:hover {
+        color: $about-forest;
+    }
+}
+
+// A single arch, referencing the school's own architecture,
+// sitting quietly behind the hero copy rather than as a card/shadow motif.
+.arch-shape {
+    position: absolute;
+    right: -8%;
+    top: 10%;
+    width: 55%;
+    max-width: 620px;
+    aspect-ratio: 3 / 4;
+    background-color: rgba($primary, 0.08);
+    border: 1px solid rgba($primary, 0.25);
+    border-radius: 50% 50% 0 0 / 35% 35% 0 0;
+    pointer-events: none;
+
+    @include media-breakpoint-down(lg) {
+        display: none;
+    }
+}
+
+// ---------- Stats strip ----------
+.stats-strip {
+    background-color: $about-paper;
+    border-bottom: 1px solid $about-line;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+
+    .stat-number {
+        font-family: "Amiri", $font-family-sans-serif;
+        font-size: 2.75rem;
+        font-weight: 700;
+        color: $about-forest;
+        line-height: 1;
+    }
+
+    .stat-label {
+        color: #5b6660;
+        margin-top: 0.35rem;
+    }
+}
+
+// ---------- Shared section furniture ----------
+.section-eyebrow {
+    display: block;
+    color: $about-forest;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.about-image-frame {
+    border: 1px solid $about-line;
+    padding: 0.6rem;
+
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+// ---------- Values ----------
+.value-block {
+    height: 100%;
+    padding: 1.75rem 1.5rem;
+    border-left: 3px solid $primary;
+    background-color: $about-paper;
+
+    .value-icon {
+        font-size: 1.75rem;
+        color: $about-forest;
+        margin-bottom: 0.75rem;
+        display: block;
+    }
+
+    h5 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: #5b6660;
+        margin-bottom: 0;
+    }
+}
+
+// ---------- Principal message ----------
+.principal-card {
+    background-color: $about-forest;
+    color: #fff;
+    padding: 2.5rem;
+
+    .principal-photo-frame {
+        width: 160px;
+        height: 160px;
+        overflow: hidden;
+        border: 3px solid $primary;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .principal-quote-icon {
+        color: $primary;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .principal-quote {
+        font-size: 1.2rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+
+    .principal-name {
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .principal-title {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+}
+
+// ---------- Timeline (a genuine sequence, so numbering/markers are earned) ----------
+.about-timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid $about-line;
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 2rem;
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -2.4rem;
+        top: 0.3rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: $primary;
+        border: 2px solid $about-forest;
+    }
+
+    .timeline-content {
+        h6 {
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: $about-forest;
+        }
+
+        p {
+            color: #5b6660;
+            margin-bottom: 0;
+        }
+    }
+}
+
+// ---------- CTA ----------
+.about-cta {
+    background-color: $about-paper;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    border-top: 1px solid $about-line;
+
+    h3 {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-weight: 700;
+        color: $about-forest;
+    }
+
+    p {
+        color: #5b6660;
+        max-width: 45ch;
+        margin: 0.75rem auto 1.75rem;
+    }
+}

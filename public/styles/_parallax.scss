@@ -1,5 +1,41 @@
+// Requires $fun-teal / $fun-coral / $fun-violet - see main-scss-additions.txt
+// Requires .anim-float from _animations.scss for the blob motion
+
 .parallax-sticky {
   position: sticky;
   top: 0;
   height: 100vh;
+}
+
+// ---------- Decorative gradient blobs ----------
+// Soft, blurred candy-colored shapes to place behind a section for a
+// friendlier, kid-facing backdrop. Use sparingly - one or two per page,
+// never stacked on top of readable text.
+//
+// Usage: <div class="blob-shape blob-shape--one anim-float" aria-hidden="true"></div>
+// placed as the first child of a `position: relative` section.
+
+.blob-shape {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blob-shape--one {
+  width: 260px;
+  height: 260px;
+  top: -60px;
+  left: -60px;
+  background: radial-gradient(circle at 30% 30%, $primary, $fun-coral);
+}
+
+.blob-shape--two {
+  width: 320px;
+  height: 320px;
+  bottom: -100px;
+  right: -80px;
+  background: radial-gradient(circle at 70% 70%, $fun-teal, $fun-violet);
 }

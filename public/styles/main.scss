@@ -1,247 +1,292 @@
-@import "@fontsource/roboto/latin-300.css";
-@import "@fontsource/roboto/latin-400.css";
-@import "@fontsource/roboto/latin-500.css";
-@import "@fontsource/roboto/latin-700.css";
-@import 'tailwindcss/tailwind.css';
+// Requires $fun-teal / $fun-coral / $fun-violet - see main-scss-additions.txt
+// Requires .anim-float from _animations.scss for the blob motion
 
-
-@import "swiper/scss";
-@import "swiper/scss/navigation";
-
-$primary: #fdd204;
-$font-family-sans-serif: "Roboto", "Noto Sans", system-ui, -apple-system,
-  sans-serif;
-
-:root {
-  --bs-primary-rgb: 253, 210, 4;
-}
-.nav-link {
-  --bs-nav-link-hover-color: rgba(var(--bs-primary-rgb), 1);
-}
-
-@import "bootstrap/scss/bootstrap";
-@import "./icons";
-@import "./header";
-@import "./animations";
-@import "./parallax";
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  & > main {
-    flex-grow: 1;
-  }
-}
-
-.list-unstyled {
-  margin-bottom: 0;
-}
-
-.link-hover-primary:hover {
-  color: $primary !important;
-}
-
-@include media-breakpoint-down(lg) {
-  #navbarSupportedContent {
-    order: 9;
-    transition: all 0.3s;
-
-    .nav-item {
-      text-align: center;
-    }
-  }
-}
-@include media-breakpoint-up(md) {
-  #departments {
-    .input-group {
-      margin-left: auto;
-    }
-  }
-
-  .course-main section:nth-child(2n) {
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
-  }
-
-  #courses-list {
-    .card:nth-child(2n + 1) .card-footer {
-      text-align: end;
-    }
-    .card:nth-child(2n) .card-img-wrapper {
-      order: 2;
-    }
-
-    .card:nth-child(2n + 1) .img-fluid {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
-    .card:nth-child(2n) .img-fluid {
-      order: 2;
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-  }
-
-  .input-group {
-    max-width: 30rem;
-  }
-}
-@include media-breakpoint-down(md) {
-  #courses-list {
-    .card {
-      margin-bottom: $spacer;
-    }
-    .card-footer {
-      text-align: end;
-    }
-    .img-fluid {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-  }
-}
-
-.w-fit-content {
-  width: fit-content;
-}
-
-.welcome-fs {
+.parallax-sticky {
+  position: sticky;
+  top: 0;
   height: 100vh;
-  min-height: 400px;
+}
+
+// ---------- Decorative gradient blobs ----------
+// Soft, blurred candy-colored shapes to place behind a section for a
+// friendlier, kid-facing backdrop. Use sparingly - one or two per page,
+// never stacked on top of readable text.
+//
+// Usage: <div class="blob-shape blob-shape--one anim-float" aria-hidden="true"></div>
+// placed as the first child of a `position: relative` section.
+
+.blob-shape {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blob-shape--one {
+  width: 260px;
+  height: 260px;
+  top: -60px;
+  left: -60px;
+  background: radial-gradient(circle at 30% 30%, $primary, $fun-coral);
+}
+
+.blob-shape--two {
+  width: 320px;
+  height: 320px;
+  bottom: -100px;
+  right: -80px;
+  background: radial-gradient(circle at 70% 70%, $fun-teal, $fun-violet);
+}
+
+
+
+
+
+// ADD THIS LINE to main.scss, right after "@import "./parallax";":
+//   @import "./about";
+//
+// ============================================================
+// About page — visual identity
+// Palette grounded in the subject: warm gold ($primary, already
+// in use) paired with a deep mosque-tile green, on a soft paper
+// background instead of pure white. One bold moment (the arch
+// in the hero) — everything else stays quiet.
+// ============================================================
+
+
+
+
+
+$about-ink: #16261f; // near-black with a green cast, used instead of flat #000
+$about-forest: #0b3d2e; // deep tile green, the site's second brand color
+$about-paper: #faf6ec; // warm paper background
+$about-line: rgba($about-forest, 0.15);
+
+.about-hero,
+.about-cta {
+  font-family: "Amiri", $font-family-sans-serif;
+}
+
+// ---------- Hero ----------
+.about-hero {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .container {
-    width: fit-content;
-    background-color: rgba($color: #000, $alpha: 0.3);
-    z-index: 1;
-  }
-}
-
-.bg-video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-main > section {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  .section-title {
-    text-transform: uppercase;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  &:nth-child(2n) {
-    background-color: $gray-200;
-  }
-}
-
-.swiper-slide {
-  height: auto !important;
-
-  .card {
-    height: 100%;
-
-    .card-body {
-      display: flex;
-      flex-direction: column;
-
-      .card-text {
-        flex-grow: 1;
-      }
-    }
-  }
-}
-
-.card-img {
-  border-radius: 0;
-}
-.card-img,
-.card-img-top {
-  object-fit: cover;
-}
-
-.row .card {
-  .card-img-top {
-    height: 100%;
-  }
-
-  height: 100%;
-}
-
-.ratio-3x2 {
-  --bs-aspect-ratio: 66.66667%;
-}
-.ratio-2x1 {
-  --bs-aspect-ratio: 50%;
-}
-
-.object-fit-cover {
-  object-fit: cover;
-}
-
-.avatar {
-  height: $font-size-base * $line-height-base * 2;
-}
-
-.btn-load-more {
-  --bs-bg-opacity: 0.35;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#departments .card {
   overflow: hidden;
+  background-color: $about-forest;
+  color: #fff;
+  padding-top: 9rem;
+  padding-bottom: 5rem;
 
-  .card-img-top {
-    height: 100%;
-    transition: 0.2s;
+  .about-hero-kicker {
+    display: inline-block;
+    color: $primary;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
   }
-  &:hover {
-    .card-img-top {
-      transform: scale(1.2);
+
+  .about-hero-title {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    max-width: 20ch;
+  }
+
+  .about-hero-lede {
+    font-family: $font-family-sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 55ch;
+    margin-bottom: 2rem;
+  }
+
+  .btn-outline-light:hover {
+    color: $about-forest;
+  }
+}
+
+// A single arch, referencing the school's own architecture,
+// sitting quietly behind the hero copy rather than as a card/shadow motif.
+.arch-shape {
+  position: absolute;
+  right: -8%;
+  top: 10%;
+  width: 55%;
+  max-width: 620px;
+  aspect-ratio: 3 / 4;
+  background-color: rgba($primary, 0.08);
+  border: 1px solid rgba($primary, 0.25);
+  border-radius: 50% 50% 0 0 / 35% 35% 0 0;
+  pointer-events: none;
+
+  @include media-breakpoint-down(lg) {
+    display: none;
+  }
+}
+
+// ---------- Stats strip ----------
+.stats-strip {
+  background-color: $about-paper;
+  border-bottom: 1px solid $about-line;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+
+  .stat-number {
+    font-family: "Amiri", $font-family-sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: $about-forest;
+    line-height: 1;
+  }
+
+  .stat-label {
+    color: #5b6660;
+    margin-top: 0.35rem;
+  }
+}
+
+// ---------- Shared section furniture ----------
+.section-eyebrow {
+  display: block;
+  color: $about-forest;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.about-image-frame {
+  border: 1px solid $about-line;
+  padding: 0.6rem;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+// ---------- Values ----------
+.value-block {
+  height: 100%;
+  padding: 1.75rem 1.5rem;
+  border-left: 3px solid $primary;
+  background-color: $about-paper;
+
+  .value-icon {
+    font-size: 1.75rem;
+    color: $about-forest;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  h5 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #5b6660;
+    margin-bottom: 0;
+  }
+}
+
+// ---------- Principal message ----------
+.principal-card {
+  background-color: $about-forest;
+  color: #fff;
+  padding: 2.5rem;
+
+  .principal-photo-frame {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border: 3px solid $primary;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .principal-quote-icon {
+    color: $primary;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .principal-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .principal-name {
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+
+  .principal-title {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+}
+
+// ---------- Timeline (a genuine sequence, so numbering/markers are earned) ----------
+.about-timeline {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 2px solid $about-line;
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -2.4rem;
+    top: 0.3rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: $primary;
+    border: 2px solid $about-forest;
+  }
+
+  .timeline-content {
+    h6 {
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: $about-forest;
+    }
+
+    p {
+      color: #5b6660;
+      margin-bottom: 0;
     }
   }
 }
 
-#courses-list {
-  .card-header {
-    padding-bottom: 0;
+// ---------- CTA ----------
+.about-cta {
+  background-color: $about-paper;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  border-top: 1px solid $about-line;
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: $about-forest;
   }
-}
 
-[data-aspect-ratio="1x1"] {
-  aspect-ratio: 1/1;
-}
-
-.navbar-toggler {
-  --bs-navbar-color: rgba(255, 255, 255, 1);
-  --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1);
-}
-
-#contactEnquiry {
-  max-height: 20 * $font-size-base * $line-height-base;
-}
-
-#art-course-welcome-fs {
-  background-image: url("../imgs/art-3.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-#video-play-pause {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  p {
+    color: #5b6660;
+    max-width: 45ch;
+    margin: 0.75rem auto 1.75rem;
+  }
 }

@@ -1,19 +1,30 @@
-body > header {
-  background-color: $dark;
-  transition: $transition-base;
+// Requires $fun-teal / $fun-coral / $fun-violet - see main-scss-additions.txt
+
+body>header {
+  background: linear-gradient(120deg, $dark 0%, #123a2e 55%, $dark 100%);
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, $primary, $fun-coral, $fun-teal) 1;
+  transition: $transition-base, backdrop-filter 0.3s ease;
 
   .nav-link {
     color: #fff;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: $primary;
+      transform: translateY(-2px);
+    }
   }
 
   &:has(.navbar-collapse.show) {
-    background-color: $dark;
+    background: linear-gradient(120deg, $dark 0%, #123a2e 55%, $dark 100%);
   }
 }
 
 .fixed-header {
   position: fixed;
-  background-color: rgba($color: $dark, $alpha: 0.3);
+  background-color: rgba($color: $dark, $alpha: 0.35);
+  backdrop-filter: blur(6px);
   top: 0;
   left: 0;
   right: 0;
@@ -21,11 +32,33 @@ body > header {
 }
 
 .scroll-up {
-  background-color: $dark;
+  background: linear-gradient(120deg, $dark 0%, #123a2e 55%, $dark 100%);
   transform: translateY(0);
+  transition: $transition-base;
 }
+
 .scroll-down {
   transform: translateY(-100%);
+  transition: $transition-base;
+}
+
+// Playful hamburger-to-close rotation
+#navbar-toggler {
+  transition: transform 0.3s ease;
+
+  &[aria-expanded="true"] {
+    transform: rotate(90deg);
+  }
+}
+
+// Gentle bounce on the "Apply now" button so it reads as inviting, not just a link
+.btn-primary {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0.5rem 1rem rgba($primary, 0.35);
+  }
 }
 
 @include media-breakpoint-down(sm) {

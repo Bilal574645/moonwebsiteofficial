@@ -1,19 +1,41 @@
+// Requires $fun-teal / $fun-coral / $fun-violet - see main-scss-additions.txt
+
 .icon {
-  transition: $transition-base;
+  position: relative;
+  transition: $transition-base, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// A soft glow ring behind each social icon on hover, tinted to its brand color
+%icon-hover-lift {
+  transform: translateY(-3px) scale(1.15) rotate(-6deg);
 }
 
 #facebook-icon:hover {
   color: #4267b2;
+  @extend %icon-hover-lift;
+  filter: drop-shadow(0 0 6px rgba(#4267b2, 0.55));
 }
+
 #twitter-icon:hover {
   color: #00acee;
+  @extend %icon-hover-lift;
+  filter: drop-shadow(0 0 6px rgba(#00acee, 0.55));
 }
+
 #instagram-icon:hover {
   color: #d62976;
+  @extend %icon-hover-lift;
+  filter: drop-shadow(0 0 6px rgba(#d62976, 0.55));
 }
+
 #youtube-icon:hover {
   color: #c4302b;
+  @extend %icon-hover-lift;
+  filter: drop-shadow(0 0 6px rgba(#c4302b, 0.55));
 }
+
 #linkedin-icon:hover {
   color: #0077b5;
+  @extend %icon-hover-lift;
+  filter: drop-shadow(0 0 6px rgba(#0077b5, 0.55));
 }

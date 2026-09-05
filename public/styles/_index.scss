@@ -1,0 +1,208 @@
+// ADD THIS LINE to main.scss, right after "@import "./about";" (or after
+// "@import "./parallax";" if you haven't added the about page yet):
+//   @import "./index";
+//
+// ============================================================
+// Homepage — animation & visual identity
+// Same palette as the About page ($about-forest / $primary),
+// one orchestrated hero entrance, and restrained hover motion
+// on the three interactive card groups (offers, classes, events).
+// ============================================================
+
+$idx-forest: #0b3d2e;
+$idx-paper: #faf6ec;
+
+// ---------- Hero ----------
+.welcome-fs {
+    .container {
+        background-color: transparent !important; // replaced by .hero-overlay below
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba($idx-forest, 0.55) 0%,
+            rgba($idx-forest, 0.35) 45%,
+            rgba(#000, 0.65) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+#video-play-pause,
+.welcome-fs .container {
+    position: relative;
+    z-index: 1;
+}
+
+#video-play-pause {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+        transform: scale(1.08);
+        background-color: $primary;
+    }
+}
+
+.hero-kicker {
+    display: block;
+    font-family: "Amiri", $font-family-sans-serif;
+    color: $primary;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+// One orchestrated entrance: kicker, headline, then search — not a
+// per-section scroll-reveal, just this single moment on page load.
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-fade-in {
+    opacity: 0;
+    animation: heroFadeUp 0.7s ease-out forwards;
+}
+
+.hero-fade-1 {
+    animation-delay: 0.05s;
+}
+
+.hero-fade-2 {
+    animation-delay: 0.25s;
+}
+
+.hero-fade-3 {
+    animation-delay: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-fade-in {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+// ---------- Offer cards (swiper) ----------
+.offer-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 1rem 2rem rgba($idx-forest, 0.15);
+    }
+}
+
+.courses-slider {
+    padding-bottom: 0.5rem;
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 2.75rem;
+        height: 2.75rem;
+        background-color: $idx-forest;
+        border-radius: 50%;
+        color: $primary;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
+        &::after {
+            font-size: 1rem;
+        }
+
+        &:hover {
+            background-color: $primary;
+            color: $idx-forest;
+            transform: scale(1.05);
+        }
+    }
+}
+
+// ---------- Department / class cards ----------
+.dept-card {
+    position: relative;
+    overflow: hidden;
+
+    .dept-index {
+        position: absolute;
+        top: 0.6rem;
+        left: 0.6rem;
+        z-index: 2;
+        background-color: rgba($idx-forest, 0.85);
+        color: $primary;
+        font-family: "Amiri", $font-family-sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.15rem 0.55rem;
+        border-radius: 2px;
+    }
+
+    .card-title {
+        transition: color 0.2s ease;
+    }
+
+    &:hover .card-title {
+        color: $idx-forest;
+    }
+}
+
+// ---------- Feedback ----------
+.feedback-content {
+    position: relative;
+}
+
+.feedback-quote-icon {
+    color: rgba($idx-forest, 0.15);
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.about-image-frame {
+    border: 1px solid rgba($idx-forest, 0.15);
+    padding: 0.6rem;
+
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+// ---------- Event cards ----------
+.event-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 1rem 2rem rgba($idx-forest, 0.15);
+    }
+}
+
+// ---------- Nav link underline (single header motif) ----------
+.navbar-nav .nav-link {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background-color: $primary;
+        transition: width 0.25s ease;
+    }
+
+    &:hover::after,
+    &.active::after {
+        width: 100%;
+    }
+}
